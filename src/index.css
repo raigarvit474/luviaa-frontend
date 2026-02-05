@@ -1,0 +1,73 @@
+:root {
+  --bg-color: #f8f9fa;
+  /* Default background */
+  --text-color: #212529;
+  --transition-speed: 0.8s;
+
+  /* Section Colors for Scroll Effect */
+  --hero-bg: #ffebee;
+  /* Light Red */
+
+  --about-bg: #fffde7;
+  /* Light Yellow */
+  --menu-bg: #e8f5e9;
+  /* Light Green */
+  --review-bg: #f3e5f5;
+  /* Light Purple */
+  --contact-bg: #000000;
+  /* Black for Contact */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition-speed) ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Scroll Snap Container */
+.snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 2rem;
+}
