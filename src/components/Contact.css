@@ -1,11 +1,14 @@
-.contact-section {
+.section.contact-section {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 4rem;
+    padding-top: 150px !important;
 }
 
 .contact-section .section-title {
     color: white;
+    margin-top: 2rem;
 }
 
 .contact-container {

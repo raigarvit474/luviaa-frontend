@@ -11,7 +11,7 @@ const Reviews = (props) => {
 
     // Fetch reviews from backend
     React.useEffect(() => {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://tridipto-backend.onrender.com';
         fetch(`${apiUrl}/api/reviews`)
             .then(res => res.json())
             .then(data => {
@@ -26,7 +26,7 @@ const Reviews = (props) => {
         e.preventDefault();
         if (newReview.name && newReview.comment) {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+                const apiUrl = import.meta.env.VITE_API_URL || 'https://tridipto-backend.onrender.com';
                 const response = await fetch(`${apiUrl}/api/reviews`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
