@@ -11,8 +11,12 @@ const Reviews = (props) => {
     const [newReview, setNewReview] = useState({ name: '', rating: 5, comment: '' });
 
     // Fetch reviews from backend
+    // Fetch reviews from backend
     React.useEffect(() => {
-        const apiUrl = import.meta.env.VITE_API_URL || 'https://luviaa-backend.onrender.com';
+        let apiUrl = import.meta.env.VITE_API_URL || 'https://luviaa-backend.onrender.com';
+        if (apiUrl.endsWith('/')) {
+            apiUrl = apiUrl.slice(0, -1);
+        }
         console.log("Fetching reviews from:", apiUrl); // DEBUG LOG
 
         fetch(`${apiUrl}/api/reviews`)
@@ -38,7 +42,10 @@ const Reviews = (props) => {
 
         if (newReview.name && newReview.comment) {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || 'https://luviaa-backend.onrender.com';
+                let apiUrl = import.meta.env.VITE_API_URL || 'https://luviaa-backend.onrender.com';
+                if (apiUrl.endsWith('/')) {
+                    apiUrl = apiUrl.slice(0, -1);
+                }
                 console.log("Submitting to:", apiUrl); // DEBUG LOG
 
                 const response = await fetch(`${apiUrl}/api/reviews`, {
