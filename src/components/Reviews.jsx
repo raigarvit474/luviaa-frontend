@@ -13,11 +13,19 @@ const Reviews = (props) => {
     // Fetch reviews from backend
     React.useEffect(() => {
         const apiUrl = import.meta.env.VITE_API_URL || 'https://luviaa-backend.onrender.com';
+        console.log("Fetching reviews from:", apiUrl); // DEBUG LOG
+
         fetch(`${apiUrl}/api/reviews`)
-            .then(res => res.json())
+            .then(res => {
+                console.log("Response status:", res.status); // DEBUG LOG
+                return res.json();
+            })
             .then(data => {
+                console.log("Reviews data received:", data); // DEBUG LOG
                 if (Array.isArray(data)) {
                     setReviews(data);
+                } else {
+                    console.error("Data is not an array:", data); // DEBUG LOG
                 }
             })
             .catch(err => console.error("Error fetching reviews:", err))
@@ -26,19 +34,29 @@ const Reviews = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Submitting review:", newReview); // DEBUG LOG
+
         if (newReview.name && newReview.comment) {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL || 'https://luviaa-backend.onrender.com';
+                console.log("Submitting to:", apiUrl); // DEBUG LOG
+
                 const response = await fetch(`${apiUrl}/api/reviews`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newReview)
                 });
 
+                console.log("Submit response status:", response.status); // DEBUG LOG
+
                 if (response.ok) {
                     const savedReview = await response.json();
+                    console.log("Review saved:", savedReview); // DEBUG LOG
                     setReviews([savedReview, ...reviews]);
                     setNewReview({ name: '', rating: 5, comment: '' });
+                } else {
+                    const errorData = await response.json();
+                    console.error("Submit failed:", errorData); // DEBUG LOG
                 }
             } catch (error) {
                 console.error("Error submitting review:", error);
@@ -46,6 +64,8 @@ const Reviews = (props) => {
                 setReviews([{ id: Date.now(), ...newReview }, ...reviews]);
                 setNewReview({ name: '', rating: 5, comment: '' });
             }
+        } else {
+            console.warn("Name or comment missing"); // DEBUG LOG
         }
     };
 
